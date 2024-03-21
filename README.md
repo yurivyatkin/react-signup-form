@@ -50,9 +50,11 @@ $ npm create vite@latest . -- --template react-ts
 [...]
 ```
 
-#### Jest
+#### Vitest
 
-[Jest](https://jestjs.io/) is a JavaScript testing framework that we will use to enable [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) in this project.
+Since we use Vite, [Vitest](https://vitest.dev/) is a natural choice for a JavaScript testing framework that we will use to enable [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) in this project. Vitest is Vite-powered and Jest-compatible, and it supports ESM, TypeScript and JSX out of the box.
+
+Furthermore, adding [Testing Library](https://testing-library.com/) to the toolset will enable clear, maintainable tests. It [integrates](https://www.robinwieruch.de/vitest-react-testing-library/) nicely with Vitest.
 
 #### Tailwind CSS
 
