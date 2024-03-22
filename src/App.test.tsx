@@ -1,4 +1,7 @@
 import { describe, it, expect } from 'vitest';
+import { render } from '@testing-library/react';
+
+import App from './App';
 
 describe('something truthy and falsy', () => {
   it('true to be true', () => {
@@ -9,3 +12,11 @@ describe('something truthy and falsy', () => {
     expect(false).toBe(false);
   });
 });
+
+describe('App', () => {
+  it('should render successfully', () => {
+    const { baseElement } = render(<App />);
+    expect(baseElement).toBeTruthy();
+  });
+});
+ 
