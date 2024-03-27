@@ -3,7 +3,7 @@ import { fn } from '@storybook/test';
 import { Button } from './button';
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Components/Form/Button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -23,26 +23,9 @@ export const Default: Story = {
   },
 };
 
-export const Destructive: Story = {
-  args: {
-    variant: 'destructive',
-    size: 'default',
-    children: 'Button',
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    variant: 'secondary',
-    size: 'sm',
-    children: 'Button',
-  },
-};
-
-export const Outline: Story = {
-  args: {
-    variant: 'outline',
-    size: 'lg',
-    children: 'Button',
-  }
-};
+export const Fancy: Story = {
+  render: () => <Button
+    className="px-[14px] py-[10px] bg-[#404eff] rounded-[25px] border border-solid border-[#4f93ff] shadow-sm text-white hover:bg-[#4f93ff] hover:text-white [font-family:'Poppins',Helvetica] text-[20px]" 
+    children="I'm fancy!"
+   />,
+}
