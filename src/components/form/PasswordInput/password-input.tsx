@@ -17,7 +17,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
   };
 
     return (
-      <div className="flex items-center bg-white rounded-[25px] p-2 w-full">
+      <div className="flex items-center bg-white rounded-[24px] px-3 py-2 w-full">
         <div className="mr-2"><LockClosedIcon /></div>
         <input
           type={showPassword ? "text" : "password"}
