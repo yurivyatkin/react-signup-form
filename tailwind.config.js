@@ -72,7 +72,7 @@ export const theme = {
       "accordion-up": "accordion-up 0.2s ease-out",
     },
     backgroundImage: {
-      'wave': "url('./src/assets/wave.svg')"
+      'wave': "url('@/assets/wave.svg')"
     }
   },
 };
