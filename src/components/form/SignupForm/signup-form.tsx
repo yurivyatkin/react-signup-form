@@ -53,6 +53,7 @@ const SignupForm = () => {
     <Form {...form}>
       <form
         className="h-[70vh] w-full flex flex-col gap-4 items-center justify-between"
+        noValidate
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
