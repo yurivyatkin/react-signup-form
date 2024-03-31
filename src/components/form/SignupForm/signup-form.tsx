@@ -1,7 +1,10 @@
 import { EnvelopeClosedIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { signup } from "@/services/auth";
+import { useAuth } from "@/hooks/useAuth";
 
 import { Button } from "../Button";
 import {
@@ -22,12 +25,10 @@ const formSchema = z
     username: z
       .string()
       .email({ message: "Please enter a valid email address" }),
-    password: z
-      .string()
-      .regex(passwordRegex, {
-        message:
-          "Must contain a capital letter, a digit, and a special character",
-      }),
+    password: z.string().regex(passwordRegex, {
+      message:
+        "Must contain a capital letter, a digit, and a special character",
+    }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -36,6 +37,8 @@ const formSchema = z
   });
 
 const SignupForm = () => {
+  const { setUser } = useAuth();
+
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       username: "",
@@ -45,8 +48,20 @@ const SignupForm = () => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const { id, token } = await signup(values.username, values.password);
+      const user = {
+        id,
+        email: values.username,
+        token,
+      };
+      setUser(user);
+    } catch (e) {
+      if (e instanceof Error) {
+        form.setError("root", { message: e.message });
+      }
+    }
   }
 
   return (
@@ -111,8 +126,13 @@ const SignupForm = () => {
         />
         <div className="flex flex-col mb-[56px] mt-[36px] w-[90vw] max-w-[400px] h-[48px]">
           <Button className="px-[14px] py-[10px] bg-[#404eff] rounded-[24px] border border-solid border-[#4f93ff] shadow-sm text-white hover:bg-[#4f93ff] hover:text-white [font-family:'Poppins',Helvetica] text-[20px]">
-            Sign Up
+            {form.formState.isSubmitting ? "Submitting..." : "Sign Up"}
           </Button>
+          {form.formState.errors.root && (
+            <p className="text-sm font-medium text-destructive">
+              {form.formState.errors.root.message}
+            </p>
+          )}
         </div>
       </form>
     </Form>
