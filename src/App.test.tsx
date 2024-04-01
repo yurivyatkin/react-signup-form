@@ -4,6 +4,20 @@ import userEvent from "@testing-library/user-event";
 
 import App from "./App";
 
+const validEmail = "yuri@example.com";
+const invalidEmail = "yuri@example";
+const validPassword = "1Q!";
+const invalidPasswordNoSpecial = "1Q";
+const invalidPasswordNoNumeric = "Q!";
+const invalidPasswordNoCapital = "1!";
+
+const errorMessageInvalidEmail = "Please enter a valid email address";
+const errorMessageInvalidPassword =
+  "Must contain a capital letter, a digit, and a special character";
+const errorMessagePasswordsDontMatch = "Passwords do not match";
+
+const successMessage = "Thank you for signing up!";
+
 beforeEach(() => {
   render(<App />);
 });
@@ -60,17 +74,6 @@ describe("Form's validation", () => {
   let confirmPasswordInput: HTMLElement;
   let signUpButton: HTMLElement;
 
-  const validEmail = "yuri@example.com";
-  const invalidEmail = "yuri@example";
-  const validPassword = "1Q!"
-  const invalidPasswordNoSpecial = "1Q";
-  const invalidPasswordNoNumeric = "Q!";
-  const invalidPasswordNoCapital = "1!";
-
-  const errorMessageInvalidEmail = "Please enter a valid email address";
-  const errorMessageInvalidPassword = "Must contain a capital letter, a digit, and a special character";
-  const errorMessagePasswordsDontMatch = "Passwords do not match";
-
   beforeEach(() => {
     userNameInput = screen.getByLabelText("Username");
     createPasswordInput = screen.getByLabelText("Create password");
@@ -84,7 +87,6 @@ describe("Form's validation", () => {
       await screen.findByText(errorMessageInvalidEmail)
     ).toBeInTheDocument();
   });
-
 
   it("displays an error message when the username input is not an email", async () => {
     await userEvent.type(userNameInput, invalidEmail);
@@ -134,10 +136,24 @@ describe("Form's validation", () => {
   it("displays an error message when the passwords do not match", async () => {
     await userEvent.type(userNameInput, validEmail);
     await userEvent.type(createPasswordInput, validPassword);
-    await userEvent.type(confirmPasswordInput, invalidPasswordNoSpecial); 
+    await userEvent.type(confirmPasswordInput, invalidPasswordNoSpecial);
     await userEvent.click(signUpButton);
     expect(
       await screen.findByText(errorMessagePasswordsDontMatch)
     ).toBeInTheDocument();
+  });
+});
+
+describe("Form's submission", () => {
+  it("displays a success message when all the fields are valid", async () => {
+    const userNameInput = screen.getByLabelText("Username");
+    const createPasswordInput = screen.getByLabelText("Create password");
+    const confirmPasswordInput = screen.getByLabelText("Confirm password");
+    const signUpButton = screen.getByRole("button", { name: "Sign Up" });
+    await userEvent.type(userNameInput, validEmail);
+    await userEvent.type(createPasswordInput, validPassword);
+    await userEvent.type(confirmPasswordInput, validPassword);
+    await userEvent.click(signUpButton);
+    expect(await screen.findByText(successMessage)).toBeInTheDocument();
   });
 });
