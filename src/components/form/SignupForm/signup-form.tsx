@@ -70,6 +70,7 @@ const SignupForm = () => {
         className="h-[70vh] w-full flex flex-col gap-4 items-center justify-between"
         noValidate
         onSubmit={form.handleSubmit(onSubmit)}
+        role="form"
       >
         <FormField
           control={form.control}
