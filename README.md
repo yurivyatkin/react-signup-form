@@ -1,30 +1,59 @@
-# React + TypeScript + Vite
+![Deploy](https://github.com/yurivyatkin/react-signup-form/actions/workflows/deploy.yml/badge.svg)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# A Sign-Up Form Exercise
 
-Currently, two official plugins are available:
+This exercise showcases the use of React + TypeScript + Tailwind CSS to build single-page applications following a Test-Driven Development approach.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requirements
 
-## Expanding the ESLint configuration
+The application has a form with three fields:
+- "username", must be a valid email address;
+- "password", must contain a capital letter, a numeric symbol, and a special number;
+- "confirm password", must match the value of the password field.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The form has a button with the text "Sign In".
 
-- Configure the top-level `parserOptions` property like this:
+The form can be submitted if all the fields are valid.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Upon successful submission, a success message is displayed.
+
+## Technical Solution
+
+The technical solution chosen for implementing the requirements is explained in [this Wiki page](https://github.com/yurivyatkin/react-signup-form/wiki/Technical-Stack).
+
+## How to run locally
+
+Clone the repository:
+```sh
+git clone git@github.com:yurivyatkin/react-signup-form.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Install the dependencies
+```sh
+npm install
+```
+
+Run the development server:
+```sh
+npm run dev
+```
+
+Open the local copy at [http://localhost:5173/]( http://localhost:5173/).
+
+## How to test
+
+Run the test runner:
+```sh
+npm test
+```
+
+## How to develop components in isolation
+
+Run Storybook:
+```sh
+npm run storybook
+```
+
+## See the deployed application
+
+Open the link: [Sign-Up Form](https://yurivyatkin.github.io/react-signup-form/).
