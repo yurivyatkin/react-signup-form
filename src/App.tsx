@@ -10,7 +10,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {user === null ? <SignUpPage /> : <ThankYouPage />};
+      {user === null ? <SignUpPage /> : <ThankYouPage />}
     </AuthContext.Provider>
   );
 }
