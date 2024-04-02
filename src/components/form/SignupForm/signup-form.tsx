@@ -17,6 +17,7 @@ import {
 } from "../Form";
 import { IconInput } from "../IconInput";
 import { PasswordInput } from "../PasswordInput";
+import { User } from "@/domains/user";
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=;:'",.<>?/-]).*$/;
 
@@ -51,10 +52,10 @@ const SignupForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const { id, token } = await signup(values.username, values.password);
-      const user = {
+      const user: User = {
         id,
         email: values.username,
-        token,
+        authToken: token,
       };
       setUser(user);
     } catch (e) {
